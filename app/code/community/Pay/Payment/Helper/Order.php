@@ -245,8 +245,9 @@ class Pay_Payment_Helper_Order extends Mage_Core_Helper_Abstract
             return true;
         } elseif ($status == Pay_Payment_Model_Transaction::STATE_CANCELED)
         {
-            
-            if ($order->getAmountDue() <= 0 || $transaction->getStatus() == Pay_Payment_Model_Transaction::STATE_SUCCESS)
+
+            /** @var $order Mage_Sales_Model_Order */
+            if ($order->getTotalDue() <= 0 || $transaction->getStatus() == Pay_Payment_Model_Transaction::STATE_SUCCESS)
             {
                 throw Mage::exception('Pay_Payment', 'Cannot cancel already paid order');
             }
