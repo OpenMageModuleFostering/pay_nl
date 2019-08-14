@@ -72,10 +72,31 @@ class Pay_Payment_OrderController extends Mage_Core_Controller_Front_Action {
     }
 
     public function exchangeAction() {
+
+
         $error = false;
         $params = $this->getRequest()->getParams();
 
         $transactionId = $params['order_id'];
+        if(empty($transactionId)){
+            $get = $this->getRequest()->setParamSources(array('_GET'))->getParams();
+            $post = $this->getRequest()->setParamSources(array('_POST'))->getParams();
+
+            if(!empty($get['order_id'])){
+                $transactionId = $get['order_id'];
+                Mage::log('Error in exchange, but fixed by getting only the _GET var ',null,'exchange.log');
+            } elseif(!empty($post['order_id'])) {
+                $transactionId = $post['order_id'];
+                Mage::log('Error in exchange, but fixed by getting only the _POST var ',null,'exchange.log');
+            } else {
+                Mage::log('Error in exchange, cannot find orderId in _GET or _POST ',null,'exchange.log');
+            }
+
+            $get=$this->getRequest()->setParamSources(array('_GET'))->getParams();
+            $post=$this->getRequest()->setParamSources(array('_POST'))->getParams();
+            Mage::log('_GET was: '.json_encode($get),null,'exchange.log');
+            Mage::log('_POST was: '.json_encode($post),null,'exchange.log');
+        }
             
         $helper = Mage::helper('pay_payment');
         /** @var $helper Pay_Payment_Helper_Data */
