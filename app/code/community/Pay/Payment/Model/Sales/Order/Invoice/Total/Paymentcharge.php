@@ -15,7 +15,7 @@ class Pay_Payment_Model_Sales_Order_Invoice_Total_Paymentcharge extends Mage_Sal
     $paymentMethod = $invoice->getOrder()->getPayment()->getMethod();
     $taxClass = Mage::helper('pay_payment')->getPaymentChargeTaxClass($paymentMethod);
 
-    $storeId = Mage::app()->getStore()->getId();
+    $storeId = $invoice->getOrder()->getStoreId();
 
     $taxCalculationModel = Mage::getSingleton('tax/calculation');
     $request = $taxCalculationModel->getRateRequest($invoice->getOrder()->getShippingAddress(), $invoice->getOrder()->getBillingAddress(), null, $storeId);
@@ -24,8 +24,8 @@ class Pay_Payment_Model_Sales_Order_Invoice_Total_Paymentcharge extends Mage_Sal
 
     if ($rate > 0)
     {
-      $baseChargeTax = round($invoice->getBasePaymentCharge() / (1 + ($rate / 100)) * ($rate / 100), 2);
-      $chargeTax = round($invoice->getPaymentCharge() / (1 + ($rate / 100)) * ($rate / 100), 2);
+      $baseChargeTax = round($basePaymentCharge / (1 + ($rate / 100)) * ($rate / 100), 2);
+      $chargeTax = round($paymentCharge/ (1 + ($rate / 100)) * ($rate / 100), 2);
     } else
     {
       $baseChargeTax = 0;
