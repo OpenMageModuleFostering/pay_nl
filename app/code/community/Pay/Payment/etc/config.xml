@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Pay_Payment>
-            <version>3.3.14</version>
+            <version>3.3.15</version>
         </Pay_Payment>
     </modules> 
        
@@ -439,6 +439,8 @@
                 <order_status>pending_payment</order_status>
                 <order_status_success>processing</order_status_success>
                 <send_mail>success</send_mail>
+                <ask_data_personal>0</ask_data_personal>
+                <ask_data_business>0</ask_data_business>
             </pay_payment_billink>
             <pay_payment_givacard>
                 <active>0</active>

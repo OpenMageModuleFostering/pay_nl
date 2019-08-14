@@ -326,16 +326,23 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
         return $output;
     }
 
-    public static function calculateTaxClass($amountInclTax, $taxAmount)
+    public static function getTaxCodeFromRate($taxRate)
     {
-        $taxClasses        = array(
+        $taxClasses     = array(
             0 => 'N',
             6 => 'L',
             21 => 'H'
         );
-        $amountExclTax     = $amountInclTax - $taxAmount;
-        $taxRate           = ($taxAmount / $amountExclTax) * 100;
-        $normalizedTaxRate = self::nearest($taxRate, array_keys($taxClasses));
-        return($taxClasses[$normalizedTaxRate]);
+        $nearestTaxRate = self::nearest($taxRate, array_keys($taxClasses));
+
+        return($taxClasses[$nearestTaxRate]);
+    }
+
+    public static function calculateTaxClass($amountInclTax, $taxAmount)
+    {
+        $amountExclTax = $amountInclTax - $taxAmount;
+        $taxRate       = ($taxAmount / $amountExclTax) * 100;
+
+        return self::getTaxCodeFromRate($taxRate);
     }
 }

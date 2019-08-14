@@ -22,7 +22,6 @@ class Pay_Payment_Model_Sales_Order_Creditmemo_Total_Paymentcharge extends Mage_
         $request->setStore(Mage::app()->getStore());
         $rate = $taxCalculationModel->getRate($request->setProductClassId($taxClass));
 
-
         
         if ($rate > 0) {                
             $baseChargeTax = round($creditmemo->getBasePaymentCharge() / (1+($rate / 100)) * ($rate/100), 2);

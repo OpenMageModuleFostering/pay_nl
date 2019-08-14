@@ -18,6 +18,7 @@ class Pay_Payment_Model_Paymentmethod extends Mage_Payment_Model_Method_Abstract
         return $this->_paymentOptionId;
     }
 
+    
 
     public function refund(Varien_Object $payment, $amount) {
         $payment instanceof Mage_Sales_Model_Order_Payment;

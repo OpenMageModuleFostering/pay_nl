@@ -11,11 +11,7 @@ class Pay_Payment_Model_Paymentmethod_Ideal extends Pay_Payment_Model_Paymentmet
     public function __construct() {
         $store = Mage::app()->getStore();
         $bankSelectType = $store->getConfig('payment/pay_payment_ideal/bank_select_type');
-//        $bankSelectType = Mage::getStoreConfig('payment/pay_payment_ideal/bank_select_type', Mage::app()->getStore());
-//        if($bankSelectType == 'none'){
-//            $this->_formBlockType = 'payment/form';
-//        }
-//        
+
         parent::__construct();
     }
 
