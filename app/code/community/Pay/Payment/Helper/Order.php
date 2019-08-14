@@ -299,8 +299,9 @@ class Pay_Payment_Helper_Order extends Mage_Core_Helper_Abstract
     /**
      * Processes the order by transactionId, the data is collected by calling the pay api
      * 
-     * @param type $transactionId
-     * @param type $store
+     * @param string $transactionId
+     * @param Mage_Core_Model_Store $store
+     * @return string|null the new status
      */
     public function processByTransactionId($transactionId, $store = null)
     {

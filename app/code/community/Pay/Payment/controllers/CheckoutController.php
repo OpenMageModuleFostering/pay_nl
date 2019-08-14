@@ -1,47 +1,44 @@
 <?php
 
-class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
+class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action
+{
 
-    public function redirectAction() {
-        Mage::log('Starting transaction',null,'paynl.log');
+    public function redirectAction()
+    {
+        Mage::log('Starting transaction', null, 'paynl.log');
         $helper = Mage::helper('pay_payment');
         $session = Mage::getSingleton('checkout/session');
         /* @var $session Mage_Checkout_Model_Session */
         if ($session->getLastRealOrderId()) {
-            Mage::log('Order found in session, orderId: '.$session->getLastRealOrderId(),null,'paynl.log');
-            $orderId = $session->getLastRealOrderId();
+            Mage::log('Order found in session, orderId: ' . $session->getLastRealOrderId(), null, 'paynl.log');
             $order = Mage::getModel('sales/order')->loadByIncrementId($session->getLastRealOrderId());
             /* @var $order Mage_Sales_Model_Order */
             $payment = $order->getPayment();
 
-            $store = Mage::app()->getStore();
-
             if ($order->getId()) {
-                Mage::log('Order loaded from session, orderId: '.$session->getLastRealOrderId(),null,'paynl.log');
+                Mage::log('Order loaded from session, orderId: ' . $session->getLastRealOrderId(), null, 'paynl.log');
                 $optionId = $session->getOptionId();
                 $optionSubId = $session->getOptionSubId();
 
                 //TODO: deze gegevens ook posten
-                $kvknummer = $session->getKvknummer();   
-                $companyname = $order->getBillingAddress()->getCompany();                
+                $kvknummer = $session->getKvknummer();
+                $companyname = $order->getBillingAddress()->getCompany();
 
-                $birthdayDay= $session->getBirthdayDay();
+                $birthdayDay = $session->getBirthdayDay();
                 $birthdayMonth = $session->getBirthdayMonth();
                 $birthdayYear = $session->getBirthdayYear();
                 $birthdate = '';
 
-                if(!empty($birthdayDay) && !empty($birthdayMonth) && !empty($birthdayYear)){
-                    $birthdate = $birthdayDay.'-'.$birthdayMonth.'-'.$birthdayYear;
+                if (!empty($birthdayDay) && !empty($birthdayMonth) && !empty($birthdayYear)) {
+                    $birthdate = $birthdayDay . '-' . $birthdayMonth . '-' . $birthdayYear;
                 }
-                
+
 
                 $serviceId = Mage::getStoreConfig('pay_payment/general/serviceid', Mage::app()->getStore());
 
                 $apiToken = Mage::getStoreConfig('pay_payment/general/apitoken', Mage::app()->getStore());
 
                 $amount = $order->getGrandTotal();
-
-                $description = $order->getIncrementId();
 
                 $sendOrderData = Mage::getStoreConfig('pay_payment/general/send_order_data', Mage::app()->getStore());
 
@@ -50,22 +47,19 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
                 $api->setExtra2($order->getCustomerEmail());
 
                 if ($sendOrderData == 1) {
-                    $itemsTotal = 0;
-
                     $items = $order->getItemsCollection();
                     foreach ($items as $item) {
                         /* @var $item Mage_Sales_Model_Order_Item */
                         $productId = $item->getId();
                         $description = $item->getName();
-                        $price = $item->getPriceInclTax();     
+                        $price = $item->getPriceInclTax();
                         $taxAmount = $item->getTaxAmount();
                         $quantity = $item->getQtyOrdered();
 
-                        $taxClass= $helper->calculateTaxClass($price,$taxAmount/$quantity);
+                        $taxClass = $helper->calculateTaxClass($price, $taxAmount / $quantity);
 
                         $price = round($price * 100);
 
-                        $itemsTotal += $price * $quantity;
 
                         if ($price != 0) {
                             $api->addProduct($productId, $description, $price, $quantity, $taxClass);
@@ -75,18 +69,20 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
                     $discountAmount = $order->getDiscountAmount();
 
                     if ($discountAmount < 0) {
-                        $itemsTotal += round($discountAmount * 100);
                         $api->addProduct(0, 'Korting (' . $order->getDiscountDescription() . ')', round($discountAmount * 100), 1, 'N');
                     }
 
                     $shipping = $order->getShippingInclTax();
-                    $shippingTax = $order->getShippingTaxAmount();
-                    $shippingTaxClass = $helper->calculateTaxClass($shipping, $shippingTax);
-                    $shipping = round($shipping * 100);
-                    if ($shipping != 0) {
-                        $itemsTotal += round($shipping * 100);
-                        $api->addProduct('0', 'Verzendkosten', $shipping, 1, $shippingTaxClass);
+
+                    if ($shipping > 0) {
+                        $shippingTax = $order->getShippingTaxAmount();
+                        $shippingTaxClass = $helper->calculateTaxClass($shipping, $shippingTax);
+                        $shipping = round($shipping * 100);
+                        if ($shipping != 0) {
+                            $api->addProduct('0', 'Verzendkosten', $shipping, 1, $shippingTaxClass);
+                        }
                     }
+
                     $extraFee = $order->getPaymentCharge();
                     if ($extraFee != 0) {
                         $code = $payment->getMethod();
@@ -96,8 +92,6 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
                         $request = $taxCalculationModel->getRateRequest($order->getShippingAddress(), $order->getBillingAddress());
                         $request->setStore(Mage::app()->getStore());
                         $rate = $taxCalculationModel->getRate($request->setProductClassId($taxClass));
-
-                        $itemsTotal += round($extraFee * 100);
 
                         $taxCode = $helper->getTaxCodeFromRate($rate);
 
@@ -109,34 +103,28 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
 
                     $arrEnduser['gender'] = substr($order->getCustomerGender(), 0, 1);
 
-                    if(empty($birthdate)){
+                    if (empty($birthdate)) {
                         $birthdate = $order->getCustomerDob();
-                        if(!empty($birthdate)){
-                            $birthdate = substr($birthdate, 0, strpos($birthdate, ' '));                         
-                            list($year,$month,$day) = explode('-', $birthdate);
-                            $birthdate = $day.'-'.$month.'-'.$year;
+                        if (!empty($birthdate)) {
+                            $birthdate = substr($birthdate, 0, strpos($birthdate, ' '));
+                            list($year, $month, $day) = explode('-', $birthdate);
+                            $birthdate = $day . '-' . $month . '-' . $year;
                         }
                     }
-                  
+
                     $arrEnduser['dob'] = $birthdate;
                     $arrEnduser['emailAddress'] = $order->getCustomerEmail();
                     $billingAddress = $order->getBillingAddress();
 
-                    
-                    
                     if (!empty($shippingAddress)) {
                         $arrEnduser['initials'] = substr($shippingAddress->getFirstname(), 0, 1);
                         $arrEnduser['lastName'] = substr($shippingAddress->getLastname(), 0, 30);
 
                         $arrEnduser['phoneNumber'] = substr($shippingAddress->getTelephone(), 0, 30);
 
-                        $streetName = "";
-                        $streetNumber = "";
-                        $matches = array();
                         $addressFull = $shippingAddress->getStreetFull();
                         $addressFull = str_replace("\n", ' ', $addressFull);
                         $addressFull = str_replace("\r", ' ', $addressFull);
-    
 
                         list($address, $housenumber) = $helper->splitAddress($addressFull);
 
@@ -151,10 +139,6 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
                     }
 
                     if (!empty($billingAddress)) {
-                        $streetName = "";
-                        $streetNumber = "";
-                        $matches = array();
-
                         $addressFull = $billingAddress->getStreetFull();
                         $addressFull = str_replace("\n", ' ', $addressFull);
                         $addressFull = str_replace("\r", ' ', $addressFull);
@@ -189,12 +173,12 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
                     $api->setPaymentOptionSubId($optionSubId);
                 }
                 try {
-                    Mage::log('Calling Pay api to start transaction',null,'paynl.log');
+                    Mage::log('Calling Pay api to start transaction', null, 'paynl.log');
 
                     $resultData = $api->doRequest();
-                    
+
                 } catch (Exception $e) {
-                    Mage::log("Creating transaction failed, Exception: ".$e->getMessage(),null,'paynl.log');
+                    Mage::log("Creating transaction failed, Exception: " . $e->getMessage(), null, 'paynl.log');
                     // Reset previous errors
                     Mage::getSingleton('checkout/session')->getMessages(true);
 
@@ -236,20 +220,20 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
 
                 $transactionId = $resultData['transaction']['transactionId'];
 
-                Mage::log('Transaction started, transactionId: '.$transactionId,null,'paynl.log');
+                Mage::log('Transaction started, transactionId: ' . $transactionId, null, 'paynl.log');
 
                 $transaction->setData(
-                        array(
-                            'transaction_id' => $transactionId,
-                            'service_id' => $serviceId,
-                            'option_id' => $optionId,
-                            'option_sub_id' => $optionSubId,
-                            'amount' => round($amount * 100),
-                            'order_id' => $order->getId(),
-                            'status' => Pay_Payment_Model_Transaction::STATE_PENDING,
-                            'created' => time(),
-                            'last_update' => time(),
-                ));
+                    array(
+                        'transaction_id' => $transactionId,
+                        'service_id' => $serviceId,
+                        'option_id' => $optionId,
+                        'option_sub_id' => $optionSubId,
+                        'amount' => round($amount * 100),
+                        'order_id' => $order->getId(),
+                        'status' => Pay_Payment_Model_Transaction::STATE_PENDING,
+                        'created' => time(),
+                        'last_update' => time(),
+                    ));
 
                 $transaction->save();
 
@@ -259,9 +243,9 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
                 $statusPending = Mage::getStoreConfig('payment/' . $payment->getMethod() . '/order_status', Mage::app()->getStore());
 
                 $order->setState(
-                        Mage_Sales_Model_Order::STATE_PENDING_PAYMENT, $statusPending, 'Transactie gestart, transactieId: ' . $transactionId." \nBetaalUrl: ".$url
+                    Mage_Sales_Model_Order::STATE_PENDING_PAYMENT, $statusPending, 'Transactie gestart, transactieId: ' . $transactionId . " \nBetaalUrl: " . $url
                 );
-                
+
 
                 $order->save();
 
@@ -273,7 +257,7 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
                 Mage::app()->getResponse()->setRedirect($url);
             } else {
                 // loading order failed
-                Mage::log('Error: OrderId found in session but loading the order failed, orderId:'.$session->getLastRealOrderId(), null, 'paynl.log');
+                Mage::log('Error: OrderId found in session but loading the order failed, orderId:' . $session->getLastRealOrderId(), null, 'paynl.log');
             }
         } else {
             // no orderId in session
