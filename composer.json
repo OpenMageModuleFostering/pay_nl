@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Pay_NL",
+    "type": "magento-module",
+    "license": "Pay",
+    "homepage": "",
+    "description": "Betaalmethoden van pay.nl",
+    "authors": [
+    {
+        "name": "Andy Pieters",
+        "email": "andy@pay.nl"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}
