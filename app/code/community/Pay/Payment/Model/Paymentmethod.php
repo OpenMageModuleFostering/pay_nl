@@ -29,6 +29,8 @@ class Pay_Payment_Model_Paymentmethod extends Mage_Payment_Model_Method_Abstract
     {
         $this->helperData = Mage::helper('pay_payment');
         $this->helperOrder = Mage::helper('pay_payment/order');
+        $show_in_admin = Mage::getStoreConfig('pay_payment/general/show_in_admin');
+        if($show_in_admin) $this->_canUseInternal = true;
 
         parent::__construct();
     }
@@ -278,6 +280,34 @@ class Pay_Payment_Model_Paymentmethod extends Mage_Payment_Model_Method_Abstract
 
         return $enduser;
     }
+    protected function addressEqual(Mage_Sales_Model_Quote $quote){
+        $billingAddress = $quote->getBillingAddress();
+        $shippingAddress = $quote->getShippingAddress();
+
+        if(strtolower($billingAddress->getStreet1()) !== strtolower($shippingAddress->getStreet1())){
+            return false;
+        }
+        if(strtolower($billingAddress->getStreet2()) !== strtolower($shippingAddress->getStreet2())){
+            return false;
+        }
+        if(strtolower($billingAddress->getStreet3()) !== strtolower($shippingAddress->getStreet3())){
+            return false;
+        }
+        if(strtolower($billingAddress->getStreet4()) !== strtolower($shippingAddress->getStreet4())){
+            return false;
+        }
+        if(strtolower($billingAddress->getPostcode()) !== strtolower($shippingAddress->getPostcode())){
+            return false;
+        }
+        if(strtolower($billingAddress->getRegion()) !== strtolower($shippingAddress->getRegion())){
+            return false;
+        }
+        if(strtolower($billingAddress->getCountryId()) !== strtolower($shippingAddress->getCountryId())){
+            return false;
+        }
+
+        return true;
+    }
 
     private function getTransactionStartData(Mage_Sales_Model_Order $order){
         $store = $order->getStore();
@@ -437,6 +467,11 @@ class Pay_Payment_Model_Paymentmethod extends Mage_Payment_Model_Method_Abstract
         if ($sendMail == 'start') {
             $order->sendNewOrderEmail();
         }
+        $payment->setAdditionalInformation('paynl_url', $url);
+        $payment->setAdditionalInformation('paynl_order_id', $transactionId);
+        $payment->setAdditionalInformation('paynl_accept_code', $objStartResult->getPaymentReference());
+        $payment->save();
+
         return array(
             'url' => $url,
             'transactionId' => $transactionId
