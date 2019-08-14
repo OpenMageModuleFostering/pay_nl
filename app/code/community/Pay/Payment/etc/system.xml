@@ -48,13 +48,25 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </serviceid>
+                        <testmode translate="label comment">
+                            <label>Testmode</label>
+                            <comment>
+                                <![CDATA[Schakel in om alle betalingen in testmode te starten. Je kunt de betaling vervolgens bevestigen met je apitoken]]>
+                            </comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </testmode>
                         <auto_invoice translate="label comment">
                             <label>Automatisch factureren</label>
                             <comment>
                                 <![CDATA[Betaalde orders automatisch factureren, LET OP! Als dit op NEE staat kun je orders ook niet refunden]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>4</sort_order>
+                            <sort_order>5</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -64,7 +76,7 @@
                             <comment><![CDATA[Een email sturen met de factuur]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>5</sort_order>
+                            <sort_order>6</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -74,7 +86,7 @@
                             <comment><![CDATA[Updates sturen wanner de status van de order wijzigt]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>6</sort_order>
+                            <sort_order>7</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -85,7 +97,7 @@
                                 <![CDATA[Klantgegeven en orderdata naar pay versturen, verplicht indien u gebruik maakt van een achteraf betaalmethode, of wanneer u gebruik wilt maken van Second Chance]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>7</sort_order>
+                            <sort_order>8</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -96,7 +108,7 @@
                                 <![CDATA[Geef aan of u wilt dat de winkelwagen weer wordt gevuld met de producten die waren besteld als de gebruiker op het betaalscherm op annuleren heeft geklikt]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>8</sort_order>
+                            <sort_order>9</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -106,7 +118,7 @@
                             <comment>
                                 <![CDATA[De pagina waar de gebruiker naartoe gestuurd moet worden bij een geslaagde betaling]]></comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>9</sort_order>
+                            <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -116,7 +128,7 @@
                             <comment>
                                 <![CDATA[De pagina waar de gebruiker naartoe gestuurd moet worden wanneer de betaalstatus nog pending is (bijv. bij paypal komt de statusupdate later)]]></comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>10</sort_order>
+                            <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -126,7 +138,7 @@
                             <comment>
                                 <![CDATA[De pagina waar de gebruiker naartoe gestuurd moet worden bij een mislukte/geannuleerde betaling]]></comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>11</sort_order>
+                            <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -137,7 +149,7 @@
                                 <![CDATA[De taalcode die naar pay.nl moet worden gestuurd, dit is van invloed op de taal van het betaalscherm en de eventuele email die naar de gebruiker wordt gestuurd door pay (bijvoorbeeld bij bankoverschrijving).]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>pay_payment/source_language</source_model>
-                            <sort_order>12</sort_order>
+                            <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -147,7 +159,7 @@
                             <comment><![CDATA[Icoontjes bij de betaalmethoden weergeven]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>13</sort_order>
+                            <sort_order>14</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -157,7 +169,7 @@
                             <comment><![CDATA[Kosten voor de betaalmethode weergeven in de checkout]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>pay_payment/source_showfee</source_model>
-                            <sort_order>14</sort_order>
+                            <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -168,7 +180,7 @@
                                 <![CDATA[Selecteer hoe groot de icoontjes van de betaalmethoden moeten zijn]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>pay_payment/source_iconsize</source_model>
-                            <sort_order>15</sort_order>
+                            <sort_order>16</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -177,7 +189,7 @@
                             <label>Text betalingskosten</label>
                             <comment><![CDATA[De text die wordt weergegeven bij de betalingskosten]]></comment>
                             <frontend_type>text</frontend_type>
-                            <sort_order>16</sort_order>
+                            <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -188,7 +200,7 @@
                                 <![CDATA[Gebruik de standard gateway, op <a href='http://status-pay.nl'>status-pay.nl</a> kunt u de status van onze techniek volgen]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>pay_payment/source_gateway</source_model>
-                            <sort_order>17</sort_order>
+                            <sort_order>18</sort_order>
                             <show_in_default>1</show_in_default>
                         </use_backup_api>
                         <backup_api_url>
@@ -199,7 +211,7 @@
                             </comment>
                             <label>Failover gateway</label>
                             <frontend_type>text</frontend_type>
-                            <sort_order>18</sort_order>
+                            <sort_order>19</sort_order>
                             <show_in_default>1</show_in_default>
                         </backup_api_url>
                         <enable_refund>
@@ -207,7 +219,7 @@
                             <comment>Schakel dit uit indien u het rechstreeks refunden wilt uitschakelen</comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>19</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                         </enable_refund>
                     </fields>
@@ -353,6 +365,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_paylink/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_paylink/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_paylink>
                 <pay_payment_afterpay type="group" translate="label" module="pay_payment">
@@ -578,6 +604,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_afterpay/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_afterpay/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_afterpay>
                 <pay_payment_afterpayem type="group" translate="label" module="pay_payment">
@@ -611,7 +651,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_afterpayem/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -804,6 +843,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_afterpayem/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_afterpayem/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_afterpayem>
                 <pay_payment_amex type="group" translate="label" module="pay_payment">
@@ -837,7 +890,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_amex/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -1030,6 +1082,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_amex/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_amex/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_amex>
                 <pay_payment_billink type="group" translate="label" module="pay_payment">
@@ -1063,7 +1129,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_billink/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -1090,7 +1155,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_billink/min_order_total</config_path>
                         </min_order_total>
-
                         <max_order_total translate="label">
                             <depends>
                                 <active>1</active>
@@ -1286,6 +1350,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_billink/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_billink/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_billink>
                 <pay_payment_bitcoin type="group" translate="label" module="pay_payment">
@@ -1319,7 +1397,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_bitcoin/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -1512,6 +1589,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_bitcoin/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_bitcoin/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_bitcoin>
                 <pay_payment_capayable type="group" translate="label" module="pay_payment">
@@ -1545,7 +1636,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_capayable/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -1738,6 +1828,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_capayable/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_capayable/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_capayable>
                 <pay_payment_capayablegespreid type="group" translate="label" module="pay_payment">
@@ -1772,7 +1876,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_capayablegespreid/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -1965,6 +2068,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_capayablegespreid/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_capayablegespreid/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_capayablegespreid>
                 <pay_payment_cartebleue type="group" translate="label" module="pay_payment">
@@ -1998,7 +2115,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_cartebleue/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -2191,6 +2307,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_cartebleue/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_cartebleue/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_cartebleue>
                 <pay_payment_fashioncheque type="group" translate="label" module="pay_payment">
@@ -2224,7 +2354,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_fashioncheque/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -2417,6 +2546,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_fashioncheque/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_fashioncheque/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_fashioncheque>
                 <pay_payment_focum type="group" translate="label" module="pay_payment">
@@ -2450,7 +2593,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_focum/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -2643,6 +2785,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_focum/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_focum/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_focum>
                 <pay_payment_gezondheidsbon type="group" translate="label" module="pay_payment">
@@ -2676,7 +2832,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_gezondheidsbon/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -2869,6 +3024,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_gezondheidsbon/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_gezondheidsbon/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_gezondheidsbon>
                 <pay_payment_giropay type="group" translate="label" module="pay_payment">
@@ -2902,7 +3071,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_giropay/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -3095,6 +3263,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_giropay/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_giropay/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_giropay>
                 <pay_payment_givacard type="group" translate="label" module="pay_payment">
@@ -3128,7 +3310,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_givacard/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -3321,6 +3502,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_givacard/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_givacard/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_givacard>
                 <pay_payment_ideal type="group" translate="label" module="pay_payment">
@@ -3342,7 +3537,6 @@
                             <source_model>pay_payment/source_paymentmethod_ideal_active</source_model>
                             <config_path>payment/pay_payment_ideal/active</config_path>
                         </active>
-
                         <title translate="label">
                             <depends>
                                 <active>1</active>
@@ -3577,6 +3771,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_ideal/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_ideal/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_ideal>
                 <pay_payment_incasso type="group" translate="label" module="pay_payment">
@@ -3610,7 +3818,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_incasso/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -3803,6 +4010,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_incasso/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_incasso/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_incasso>
                 <pay_payment_instore type="group" translate="label" module="pay_payment">
@@ -3850,7 +4071,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_instore/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -4043,6 +4263,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_instore/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_instore/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_instore>
                 <pay_payment_klarna type="group" translate="label" module="pay_payment">
@@ -4268,6 +4502,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_klarna/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_klarna/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_klarna>
                 <pay_payment_maestro type="group" translate="label" module="pay_payment">
@@ -4301,7 +4549,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_maestro/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -4494,6 +4741,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_maestro/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_maestro/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_maestro>
                 <pay_payment_mistercash type="group" translate="label" module="pay_payment">
@@ -4527,7 +4788,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_mistercash/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -4720,6 +4980,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_mistercash/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_mistercash/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_mistercash>
                 <pay_payment_mybank type="group" translate="label" module="pay_payment">
@@ -4753,7 +5027,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_mybank/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -4946,6 +5219,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_mybank/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_mybank/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_mybank>
                 <pay_payment_overboeking type="group" translate="label" module="pay_payment">
@@ -4979,7 +5266,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_overboeking/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -5172,6 +5458,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_overboeking/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_mybank/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_overboeking>
                 <pay_payment_paypal type="group" translate="label" module="pay_payment">
@@ -5205,7 +5505,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_paypal/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -5398,6 +5697,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_paypal/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_paypal/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_paypal>
                 <pay_payment_paysafecard type="group" translate="label" module="pay_payment">
@@ -5431,7 +5744,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_paysafecard/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -5624,6 +5936,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_paysafecard/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_paysafecard/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_paysafecard>
                 <pay_payment_podiumkadokaart type="group" translate="label" module="pay_payment">
@@ -5657,7 +5983,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_podiumkadokaart/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -5850,6 +6175,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_podiumkadokaart/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_podiumkadokaart/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_podiumkadokaart>
                 <pay_payment_postepay type="group" translate="label" module="pay_payment">
@@ -5883,7 +6222,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_postepay/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -6076,6 +6414,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_postepay/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_postepay/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_postepay>
                 <pay_payment_sofortbanking type="group" translate="label" module="pay_payment">
@@ -6109,7 +6461,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_sofortbanking/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -6302,6 +6653,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_sofortbanking/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_sofortbanking/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_sofortbanking>
                 <pay_payment_telefoon type="group" translate="label" module="pay_payment">
@@ -6335,7 +6700,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_telefoon/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -6528,6 +6892,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_telefoon/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_telefoon/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_telefoon>
                 <pay_payment_visamastercard type="group" translate="label" module="pay_payment">
@@ -6561,7 +6939,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_visamastercard/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -6754,6 +7131,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_visamastercard/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_visamastercard/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_visamastercard>
                 <pay_payment_vvvgiftcard type="group" translate="label" module="pay_payment">
@@ -6979,6 +7370,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_vvvgiftcard/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_vvvgiftcard/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_vvvgiftcard>
                 <pay_payment_webshopgiftcard type="group" translate="label" module="pay_payment">
@@ -7012,7 +7417,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_webshopgiftcard/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -7205,6 +7609,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_webshopgiftcard/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_webshopgiftcard/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_webshopgiftcard>
                 <pay_payment_wijncadeau type="group" translate="label" module="pay_payment">
@@ -7238,7 +7656,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_wijncadeau/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -7431,6 +7848,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_wijncadeau/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_wijncadeau/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_wijncadeau>
                 <pay_payment_yehhpay type="group" translate="label" module="pay_payment">
@@ -7464,7 +7895,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_yehhpay/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -7657,6 +8087,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_yehhpay/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_yehhpay/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_yehhpay>
                 <pay_payment_yourgift type="group" translate="label" module="pay_payment">
@@ -7690,7 +8134,6 @@
                             <show_in_store>1</show_in_store>
                             <config_path>payment/pay_payment_yourgift/title</config_path>
                         </title>
-
                         <sort_order translate="label">
                             <depends>
                                 <active>1</active>
@@ -7883,6 +8326,20 @@
                             <source_model>pay_payment/source_sendmail</source_model>
                             <config_path>payment/pay_payment_yourgift/send_mail</config_path>
                         </send_mail>
+                        <invoice_email translate="label comment">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Emailen bij factureren</label>
+                            <comment><![CDATA[Een email sturen met de factuur, LET OP: De email wordt alleen gestuurd als je bovenaan bij Algemene instellingen emailen bij factureren aan hebt staan]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <config_path>payment/pay_payment_yourgift/invoice_email</config_path>
+                        </invoice_email>
                     </fields>
                 </pay_payment_yourgift>
             </groups>

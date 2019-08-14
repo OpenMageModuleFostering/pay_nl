@@ -173,6 +173,7 @@ class Pay_Payment_Model_Paymentmethod extends Mage_Payment_Model_Method_Abstract
     }
     private function getBillingAddress(Mage_Sales_Model_Order $order){
         $objBillingAddress = $order->getBillingAddress();
+        if($objBillingAddress) return array();
 
         $arrAddressFull = array();
         $arrAddressFull[] = $objBillingAddress->getStreet1();
@@ -202,6 +203,8 @@ class Pay_Payment_Model_Paymentmethod extends Mage_Payment_Model_Method_Abstract
 
     private function getShippingAddress(Mage_Sales_Model_Order $order){
         $objShippingAddress= $order->getShippingAddress();
+
+        if(!$objShippingAddress) return array();
 
         $arrAddressFull = array();
         $arrAddressFull[] = $objShippingAddress->getStreet1();
@@ -242,22 +245,36 @@ class Pay_Payment_Model_Paymentmethod extends Mage_Payment_Model_Method_Abstract
         }
 
         list($birthDate) = explode(' ', $order->getCustomerDob());
-        list($dobYear, $dobMonth, $dobDay) = explode('-', $birthDate);
+        if(!empty(($birthDate))) {
+            list($dobYear, $dobMonth, $dobDay) = explode('-', $birthDate);
 
-        $birthDate = null;
-        if($dobDay && $dobMonth && $dobYear){
-            $birthDate = $dobDay . '-' . $dobMonth . '-' . $dobYear;
+            $birthDate = null;
+            if ($dobDay && $dobMonth && $dobYear) {
+                $birthDate = $dobDay . '-' . $dobMonth . '-' . $dobYear;
+            }
+        } else {
+            $birthDate = null;
         }
         $iban = $additionalData['iban'] ? $additionalData['iban'] : null;
 
         $enduser = array(
-            'initials' => $order->getShippingAddress()->getFirstname(),
-            'lastName' => $order->getShippingAddress()->getLastname(),
             'birthDate' => $birthDate,
-            'iban' => $iban,
-            'phoneNumber' => $order->getShippingAddress()->getTelephone(),
-            'emailAddress' => $order->getShippingAddress()->getEmail()
+            'iban' => $iban
         );
+
+        if($order->getShippingAddress()){
+            $enduserAddress = $order->getShippingAddress();
+        } else{
+            $enduserAddress = $order->getBillingAddress();
+        }
+        if($enduserAddress){
+            $enduser = array_merge($enduser, array(
+                'initials' => $enduserAddress->getFirstname(),
+                'lastName' => $enduserAddress->getLastname(),
+                'phoneNumber' => $enduserAddress->getTelephone(),
+                'emailAddress' => $enduserAddress->getEmail()
+            ));
+        }
 
         return $enduser;
     }
@@ -268,6 +285,7 @@ class Pay_Payment_Model_Paymentmethod extends Mage_Payment_Model_Method_Abstract
         $session = Mage::getSingleton('checkout/session');
 
         $sendOrderData = $store->getConfig('pay_payment/general/send_order_data');
+        $testMode = $store->getConfig('pay_payment/general/testmode');
 
         $additionalData = $session->getPaynlPaymentData();
 
@@ -282,6 +300,7 @@ class Pay_Payment_Model_Paymentmethod extends Mage_Payment_Model_Method_Abstract
 
         $arrStartData = array(
             'amount' => $order->getGrandTotal(),
+            'testmode' => $testMode,
             'returnUrl' => Mage::getUrl('pay_payment/order/return', array('_store' => $store->getCode())),
             'exchangeUrl' => Mage::getUrl('pay_payment/order/exchange', array('_store' => $store->getCode())),
             'paymentMethod' => $optionId,
