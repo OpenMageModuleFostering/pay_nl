@@ -8,7 +8,7 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
         $helperApi = Mage::helper('pay_payment/api_ispayserverip');
         $helperApi instanceof Pay_Payment_Helper_Api_Ispayserverip;
         $helperApi->setIpaddress($ipAddress);
-        $result = $helperApi->doRequest();
+        $result    = $helperApi->doRequest();
         return $result['result'] == 1;
     }
 
@@ -21,67 +21,63 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
     public function getTransaction($transactionId)
     {
         $transaction = Mage::getModel('pay_payment/transaction')
-                ->getCollection()
-                ->addFieldToFilter('transaction_id', $transactionId)
-                ->getFirstItem();
+            ->getCollection()
+            ->addFieldToFilter('transaction_id', $transactionId)
+            ->getFirstItem();
         return $transaction;
     }
 
     public function getOptions($store = null)
     {
-        if ($store == null)
-        {
+        if ($store == null) {
             $store = Mage::app()->getStore();
         }
         $serviceId = $store->getConfig('pay_payment/general/serviceid');
         //$serviceId = Mage::getStoreConfig('pay_payment/general/serviceid', $store);
 
         $options = Mage::getModel('pay_payment/option')->getCollection()
-                ->addFieldToFilter('service_id', $serviceId);
+            ->addFieldToFilter('service_id', $serviceId);
         return $options;
     }
 
     public function getOption($option_id, $store = null)
     {
-        if ($store == null)
-        {
+        if ($store == null) {
             $store = Mage::app()->getStore();
         }
         $serviceId = $store->getConfig('pay_payment/general/serviceid');
         //$serviceId = Mage::getStoreConfig('pay_payment/general/serviceid', $store);
 
         $option = Mage::getModel('pay_payment/option')->getCollection()
-                ->addFieldToFilter('service_id', $serviceId)
-                ->addFieldToFilter('option_id', $option_id)
-                ->getFirstItem();
+            ->addFieldToFilter('service_id', $serviceId)
+            ->addFieldToFilter('option_id', $option_id)
+            ->getFirstItem();
         return $option;
     }
 
     private function _saveOptions($data, $store = null)
     {
-        if ($store == null)
-        {
+        if ($store == null) {
             $store = Mage::app()->getStore();
         }
         $serviceId = $store->getConfig('pay_payment/general/serviceid');
         //$serviceId = Mage::getStoreConfig('pay_payment/general/serviceid', $store);
 
-        $service = $data['service'];
+        $service        = $data['service'];
         $paymentOptions = $data['paymentOptions'];
 
         $imageBasePath = (string) $service['basePath'];
 
         $arrUsedOptionIds = array();
 
-        foreach ($paymentOptions as $paymentOption)
-        {
-            $image = $imageBasePath . $paymentOption['path'] . $paymentOption['img'];
+        foreach ($paymentOptions as $paymentOption) {
+            $image = $imageBasePath.$paymentOption['path'].$paymentOption['img'];
 
             //Laden
             $objOption = Mage::getModel('pay_payment/option')->getCollection()
-                    ->addFieldToFilter('service_id', $serviceId)
-                    ->addFieldToFilter('option_id', $paymentOption['id'])
-                    ->getFirstItem();
+                ->addFieldToFilter('service_id', $serviceId)
+                ->addFieldToFilter('option_id', $paymentOption['id'])
+                ->getFirstItem();
 
             $optionData = array(
                 'option_id' => (string) $paymentOption['id'],
@@ -98,22 +94,22 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
 
             $arrUsedOptionSubIds = array();
 
-            if (!empty($paymentOption['paymentOptionSubList']) && $paymentOption['id'] == 10)
-            {
-                foreach ($paymentOption['paymentOptionSubList'] as $optionSub)
-                {
+            if (!empty($paymentOption['paymentOptionSubList']) && $paymentOption['id']
+                == 10) {
+                foreach ($paymentOption['paymentOptionSubList'] as $optionSub) {
                     $optionSubData = array(
                         'option_sub_id' => $optionSub['id'],
                         'option_internal_id' => $objOption->getInternalId(),
                         'name' => $optionSub['name'],
-                        'image' => $imageBasePath . $optionSub['path'] . $optionSub['img'],
+                        'image' => $imageBasePath.$optionSub['path'].$optionSub['img'],
                         'active' => $optionSub['state']
                     );
 
                     $objOptionSub = Mage::getModel('pay_payment/optionsub')->getCollection()
-                            ->addFieldToFilter('option_sub_id', $optionSub['id'])
-                            ->addFieldToFilter('option_internal_id', $objOption->getInternalId())
-                            ->getFirstItem();
+                        ->addFieldToFilter('option_sub_id', $optionSub['id'])
+                        ->addFieldToFilter('option_internal_id',
+                            $objOption->getInternalId())
+                        ->getFirstItem();
 
                     /* @var $objOptionSub Pay_Payment_Model_Optionsub */
                     $objOptionSub->addData($optionSubData);
@@ -124,34 +120,33 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
             }
             //Alle subs die niet zijn opnieuw zijn binnengekomen verwijderen
             $arrSubsToDelete = Mage::getModel('pay_payment/optionsub')
-                    ->getCollection()
-                    ->addFieldToFilter('option_internal_id', $objOption->getInternalId())
-                    ->addFieldToFilter('internal_id', array('nin' => $arrUsedOptionSubIds));
+                ->getCollection()
+                ->addFieldToFilter('option_internal_id',
+                    $objOption->getInternalId())
+                ->addFieldToFilter('internal_id',
+                array('nin' => $arrUsedOptionSubIds));
 
-            foreach ($arrSubsToDelete as $subToDelete)
-            {
+            foreach ($arrSubsToDelete as $subToDelete) {
                 $subToDelete->delete();
             }
         }
         $arrOptionsToDelete = Mage::getModel('pay_payment/option')
-                ->getCollection()
-                ->addFieldToFilter('service_id', $serviceId)
-                ->addFieldToFilter('internal_id', array('nin' => $arrUsedOptionIds));
-        foreach ($arrOptionsToDelete as $optionToDelete)
-        {
+            ->getCollection()
+            ->addFieldToFilter('service_id', $serviceId)
+            ->addFieldToFilter('internal_id', array('nin' => $arrUsedOptionIds));
+        foreach ($arrOptionsToDelete as $optionToDelete) {
             $optionToDelete->delete();
         }
     }
 
     public function loadOptions($store = null)
     {
-        if ($store == null)
-        {
+        if ($store == null) {
             $store = Mage::app()->getStore();
         }
         $serviceId = $store->getConfig('pay_payment/general/serviceid');
         //$serviceId = Mage::getStoreConfig('pay_payment/general/serviceid', $store);
-        $apiToken = $store->getConfig('pay_payment/general/apitoken');
+        $apiToken  = $store->getConfig('pay_payment/general/apitoken');
         //$apiToken = Mage::getStoreConfig('pay_payment/general/apitoken', $store);
 
         $api = Mage::helper('pay_payment/api_getservice');
@@ -167,7 +162,7 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function getPaymentChargeTaxClass($code)
     {
-        $taxClass = Mage::getStoreConfig('payment/' . strval($code) . '/charge_tax_class');
+        $taxClass = Mage::getStoreConfig('payment/'.strval($code).'/charge_tax_class');
         return $taxClass;
     }
 
@@ -179,28 +174,25 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getPaymentCharge($code, $quote = null)
     {
-        if (is_null($quote))
-        {
+        if (is_null($quote)) {
             $quote = Mage::getSingleton('checkout/session')->getQuote();
         }
-        $amount = 0;
+        $amount  = 0;
         $address = $quote->isVirtual() ? $quote->getBillingAddress() : $quote->getShippingAddress();
 
 
-        $chargeType = Mage::getStoreConfig('payment/' . strval($code) . '/charge_type');
-        $chargeValue = Mage::getStoreConfig('payment/' . strval($code) . '/charge_value');
+        $chargeType  = Mage::getStoreConfig('payment/'.strval($code).'/charge_type');
+        $chargeValue = Mage::getStoreConfig('payment/'.strval($code).'/charge_value');
 
-        if ($chargeType == "percentage")
-        {
+        if ($chargeType == "percentage") {
             //totaal moet berekend worden
             $subTotal = $address->getSubtotalInclTax();
             $shipping = $address->getShippingInclTax();
             $discount = $address->getDiscountAmount();
 
             $grandTotal = $subTotal + $shipping + $discount;
-            $amount = $grandTotal * floatval($chargeValue) / 100;
-        } else
-        {
+            $amount     = $grandTotal * floatval($chargeValue) / 100;
+        } else {
             $amount = floatval($chargeValue);
         }
         //  }	
@@ -216,11 +208,9 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
         $language = $store->getConfig('pay_payment/general/user_language');
 //        $language = Mage::getStoreConfig('pay_payment/general/user_language', $store);
 
-        if ($language == 'browser' || empty($language))
-        {
+        if ($language == 'browser' || empty($language)) {
             return self::getDefaultLanguage();
-        } else
-        {
+        } else {
             return $language;
         }
     }
@@ -229,35 +219,30 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
     {
 
         if (isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]))
-            return self::parseDefaultLanguage($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
-        else
-            return self::parseDefaultLanguage(NULL);
+                return self::parseDefaultLanguage($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+        else return self::parseDefaultLanguage(NULL);
     }
 
     private static function parseDefaultLanguage($http_accept, $deflang = "en")
     {
-        if (isset($http_accept) && strlen($http_accept) > 1)
-        {
+        if (isset($http_accept) && strlen($http_accept) > 1) {
             # Split possible languages into array
             $x = explode(",", $http_accept);
-            foreach ($x as $val)
-            {
+            foreach ($x as $val) {
                 #check for q-value and create associative array. No q-value means 1 by rule
-                if (preg_match("/(.*);q=([0-1]{0,1}.[0-9]{0,4})/i", $val, $matches))
-                {
-                    $lang[$matches[1]] = (float) $matches[2] . '';
-                } else
-                {
+                if (preg_match("/(.*);q=([0-1]{0,1}.[0-9]{0,4})/i", $val,
+                        $matches)) {
+                    $lang[$matches[1]] = (float) $matches[2].'';
+                } else {
                     $lang[$val] = 1.0;
                 }
             }
 
             $languages = new Pay_Payment_Model_Source_Language();
 
-            $arrLanguages = $languages->toOptionArray();
+            $arrLanguages          = $languages->toOptionArray();
             $arrAvailableLanguages = array();
-            foreach ($arrLanguages as $language)
-            {
+            foreach ($arrLanguages as $language) {
                 $arrAvailableLanguages[] = $language['value'];
             }
 
@@ -266,15 +251,12 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
 
             #return default language (highest q-value)
             $qval = 0.0;
-            foreach ($lang as $key => $value)
-            {
+            foreach ($lang as $key => $value) {
                 $languagecode = strtolower(substr($key, 0, 2));
 
-                if (in_array($languagecode, $arrAvailableLanguages))
-                {
-                    if ($value > $qval)
-                    {
-                        $qval = (float) $value;
+                if (in_array($languagecode, $arrAvailableLanguages)) {
+                    if ($value > $qval) {
+                        $qval    = (float) $value;
                         $deflang = $key;
                     }
                 }
@@ -287,16 +269,17 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
     {
         $strAddress = trim($strAddress);
 
-        $a = preg_split('/([0-9]+)/', $strAddress, 2, PREG_SPLIT_DELIM_CAPTURE);
-        $strStreetName = trim(array_shift($a));
+        $a               = preg_split('/([0-9]+)/', $strAddress, 2,
+            PREG_SPLIT_DELIM_CAPTURE);
+        $strStreetName   = trim(array_shift($a));
         $strStreetNumber = trim(implode('', $a));
 
-        if (empty($strStreetName))
-        { // American address notation
-            $a = preg_split('/([a-zA-Z]{2,})/', $strAddress, 2, PREG_SPLIT_DELIM_CAPTURE);
+        if (empty($strStreetName)) { // American address notation
+            $a = preg_split('/([a-zA-Z]{2,})/', $strAddress, 2,
+                PREG_SPLIT_DELIM_CAPTURE);
 
             $strStreetNumber = trim(array_shift($a));
-            $strStreetName = implode(' ', $a);
+            $strStreetName   = implode(' ', $a);
         }
 
         return array($strStreetName, $strStreetNumber);
@@ -306,25 +289,20 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
     {
 
         //Just get the headers if we can or else use the SERVER global
-        if (function_exists('apache_request_headers'))
-        {
+        if (function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
-        } else
-        {
+        } else {
             $headers = $_SERVER;
         }
         //Get the forwarded IP if it exists
-        if (array_key_exists('X-Forwarded-For', $headers))
-        {
+        if (array_key_exists('X-Forwarded-For', $headers)) {
             $the_ip = $headers['X-Forwarded-For'];
-        } elseif (array_key_exists('HTTP_X_FORWARDED_FOR', $headers))
-        {
+        } elseif (array_key_exists('HTTP_X_FORWARDED_FOR', $headers)) {
             $the_ip = $headers['HTTP_X_FORWARDED_FOR'];
-        } else
-        {
+        } else {
             $the_ip = $_SERVER['REMOTE_ADDR'];
         }
-        $arrIp = explode(',', $the_ip);
+        $arrIp  = explode(',', $the_ip);
         $the_ip = $arrIp[0];
 
         $the_ip = filter_var(trim($the_ip), FILTER_VALIDATE_IP);
@@ -332,4 +310,32 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
         return $the_ip;
     }
 
+    public static function nearest($number, $numbers)
+    {
+        $output = FALSE;
+        $number = intval($number);
+        if (is_array($numbers) && count($numbers) >= 1) {
+            $NDat = array();
+            foreach ($numbers as $n) {
+                $NDat[abs($number - $n)] = $n;
+            }
+            ksort($NDat);
+            $NDat   = array_values($NDat);
+            $output = $NDat[0];
+        }
+        return $output;
+    }
+
+    public static function calculateTaxClass($amountInclTax, $taxAmount)
+    {
+        $taxClasses        = array(
+            0 => 'N',
+            6 => 'L',
+            21 => 'H'
+        );
+        $amountExclTax     = $amountInclTax - $taxAmount;
+        $taxRate           = ($taxAmount / $amountExclTax) * 100;
+        $normalizedTaxRate = self::nearest($taxRate, array_keys($taxClasses));
+        return($taxClasses[$normalizedTaxRate]);
+    }
 }

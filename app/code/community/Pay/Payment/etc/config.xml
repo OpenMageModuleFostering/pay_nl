@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Pay_Payment>
-            <version>3.3.13</version>
+            <version>3.3.14</version>
         </Pay_Payment>
     </modules> 
        
@@ -431,6 +431,33 @@
                 <order_status_success>processing</order_status_success>
                 <send_mail>success</send_mail>
             </pay_payment_postepay>
+            <pay_payment_billink>
+                <active>0</active>
+                <model>pay_payment/Paymentmethod_Billink</model>
+                <title>Billink</title>
+                <payment_action>authorize</payment_action>
+                <order_status>pending_payment</order_status>
+                <order_status_success>processing</order_status_success>
+                <send_mail>success</send_mail>
+            </pay_payment_billink>
+            <pay_payment_givacard>
+                <active>0</active>
+                <model>pay_payment/Paymentmethod_Givacard</model>
+                <title>Givacard</title>
+                <payment_action>authorize</payment_action>
+                <order_status>pending_payment</order_status>
+                <order_status_success>processing</order_status_success>
+                <send_mail>success</send_mail>
+            </pay_payment_givacard>
+            <pay_payment_wijncadeau>
+                <active>0</active>
+                <model>pay_payment/Paymentmethod_Wijncadeau</model>
+                <title>Wijncadeau</title>
+                <payment_action>authorize</payment_action>
+                <order_status>pending_payment</order_status>
+                <order_status_success>processing</order_status_success>
+                <send_mail>success</send_mail>
+            </pay_payment_wijncadeau>
         </payment>
     </default>
 </config>

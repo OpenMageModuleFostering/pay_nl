@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-<!--    <tabs>
+    <!--    <tabs>
         <pay_payment translate="label" module="pay_payment">
             <label><![CDATA[<img src='http://pay.nl/images/header_logo.gif' style='width:50px;height:50px;' />]]></label>
             <sort_order>1</sort_order>
         </pay_payment>
     </tabs>-->
     <sections>
-<!--        Algemene instellingen-->
+        <!--        Algemene instellingen-->
         <pay_payment translate="label" module="pay_payment">           
             <label><![CDATA[<img alt='Pay.nl instellingen' title='Pay.nl instellingen' style='margin-top:3px;margin-bottom:-3px;height:14px;' src='/media/pay_payment/logo.png' />]]></label>
             <tab>sales</tab>
@@ -77,7 +77,7 @@
                         </send_statusupdates>        
                         <send_order_data translate="label comment">
                             <label>Order data sturen</label>
-                            <comment><![CDATA[Klantgegeven en orderdata naar pay versturen, verplicht indien u gebruik maakt van afterpay]]></comment>
+                            <comment><![CDATA[Klantgegeven en orderdata naar pay versturen, verplicht indien u gebruik maakt van een achteraf betaalmethode, of wanneer u gebruik wilt maken van Second Chance]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>7</sort_order>
@@ -142,7 +142,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </show_icons>
-                         <icon_size>
+                        <icon_size>
                             <label>Grootte van icoontjes</label>
                             <comment><![CDATA[Selecteer hoe groot de icoontjes van de betaalmethoden moeten zijn]]></comment>
                             <frontend_type>select</frontend_type>
@@ -270,7 +270,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -282,7 +282,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -373,7 +373,177 @@
                         </send_mail>
                     </fields>
                 </pay_payment_afterpay>
-                <!--  Afterpay -->
+                
+                <pay_payment_billink>
+                    <label>Pay.nl - Billink</label>        
+                    <model>pay_payment/Model_Paymentmethod_Billink</model>            
+                    <sort_order>1015</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>   
+                        <active translate="label">
+                            <label>Actief</label>
+                            <comment>Wilt u deze betaalmethode gebruiken</comment>                           
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_paymentmethod_billink_active</source_model>                            
+                        </active>
+                        <title translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Titel van de betaalmethode</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        
+                        <sort_order translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Betaalmethode sorteer volgorde</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <min_order_total translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Minimum bedrag</label>
+                            <comment>Het minimum bedrag waarvoor deze betaalmethode gebruikt mag worden</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Maximum bedrag</label>
+                            <comment>Het maximum bedrag waarvoor deze betaalmethode gebruikt mag worden</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_order_total>
+                        <allowspecific translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Beschikbaarheid per land</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <depends>
+                                <active>1</active>
+                                <allowspecific>1</allowspecific>
+                            </depends>
+                            <label>Toegestane landen</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Selecteer de landen waarvoor deze betaalmethode beschikbaar is</comment>
+                        </specificcountry>
+                        <order_status translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Nieuwe order status</label>
+                            <comment>De status die een order moet krijgen bij het toevoegen</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_status_pendingPayment</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status>
+                        <order_status_success translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Gelukt order status</label>
+                            <comment>De status die een order moet krijgen na succesvolle betaling</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_status_processing</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status_success>
+                        <charge_type translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Extra kosten rekenen</label>
+                            <comment>Geef hier aan of u extra kosten wilt rekenen op basis van een percentage van het totaalbedrag of een vast bedrag</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/system_config_source_chargetype</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </charge_type>
+                        <charge_value translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Extra kosten</label>
+                            <comment>Geef hier aan hoeveel extra kosten u wilt rekenen, gebruik een punt voor decimalen, als u geen extra kosten wilt rekenen vult u niets in</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>201</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </charge_value>
+                        <charge_tax_class translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Btw voor extra kosten</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_taxclass</source_model>
+                            <sort_order>202</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </charge_tax_class>
+                        <send_mail translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Bevestigingsmail sturen</label>
+                            <comment>Wanneer wilt u dat de bevestigingsmail wordt verstuurd</comment>                           
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_sendmail</source_model>                            
+                        </send_mail>
+                    </fields>
+                </pay_payment_billink>
+                <!--  Bitcoin -->
                 <pay_payment_bitcoin translate="label" module="paygate">
                     <label>Pay.nl - Bitcoin</label>        
                     <model>pay_payment/Model_Paymentmethod_Bitcoin</model>            
@@ -440,7 +610,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -452,7 +622,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -610,7 +780,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -622,7 +792,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -780,7 +950,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -792,7 +962,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -950,7 +1120,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -962,7 +1132,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -1119,7 +1289,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -1131,7 +1301,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -1288,7 +1458,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -1300,7 +1470,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -1458,7 +1628,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -1470,7 +1640,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -1561,11 +1731,180 @@
                         </send_mail>
                     </fields>
                 </pay_payment_giropay>
+                <pay_payment_givacard>
+                    <label>Pay.nl - Givacard</label>        
+                    <model>pay_payment/Model_Paymentmethod_Givacard</model>            
+                    <sort_order>1075</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>   
+                        <active translate="label">
+                            <label>Actief</label>
+                            <comment>Wilt u deze betaalmethode gebruiken</comment>                           
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_paymentmethod_givacard_active</source_model>                            
+                        </active>
+                        <title translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Titel van de betaalmethode</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        
+                        <sort_order translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Betaalmethode sorteer volgorde</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <min_order_total translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Minimum bedrag</label>
+                            <comment>Het minimum bedrag waarvoor deze betaalmethode gebruikt mag worden</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Maximum bedrag</label>
+                            <comment>Het maximum bedrag waarvoor deze betaalmethode gebruikt mag worden</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_order_total>
+                        <allowspecific translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Beschikbaarheid per land</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <depends>
+                                <active>1</active>
+                                <allowspecific>1</allowspecific>
+                            </depends>
+                            <label>Toegestane landen</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Selecteer de landen waarvoor deze betaalmethode beschikbaar is</comment>
+                        </specificcountry>
+                        <order_status translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Nieuwe order status</label>
+                            <comment>De status die een order moet krijgen bij het toevoegen</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_status_pendingPayment</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status>
+                        <order_status_success translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Gelukt order status</label>
+                            <comment>De status die een order moet krijgen na succesvolle betaling</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_status_processing</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status_success>
+                        <charge_type translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Extra kosten rekenen</label>
+                            <comment>Geef hier aan of u extra kosten wilt rekenen op basis van een percentage van het totaalbedrag of een vast bedrag</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/system_config_source_chargetype</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </charge_type>
+                        <charge_value translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Extra kosten</label>
+                            <comment>Geef hier aan hoeveel extra kosten u wilt rekenen, gebruik een punt voor decimalen, als u geen extra kosten wilt rekenen vult u niets in</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>201</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </charge_value>
+                        <charge_tax_class translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Btw voor extra kosten</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_taxclass</source_model>
+                            <sort_order>202</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </charge_tax_class>
+                        <send_mail translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Bevestigingsmail sturen</label>
+                            <comment>Wanneer wilt u dat de bevestigingsmail wordt verstuurd</comment>                           
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_sendmail</source_model>                            
+                        </send_mail>
+                    </fields>
+                </pay_payment_givacard>
                 <!--  IDEAL  -->               
                 <pay_payment_ideal translate="label" module="paygate">
                     <label>Pay.nl - Ideal</label>        
                     <model>pay_payment/Model_Paymentmethod_Ideal</model>            
-                    <sort_order>1070</sort_order>
+                    <sort_order>1080</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
@@ -1652,7 +1991,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -1664,7 +2003,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -1822,7 +2161,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -1834,7 +2173,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -1992,7 +2331,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -2004,7 +2343,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -2162,7 +2501,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -2174,7 +2513,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -2332,7 +2671,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -2344,7 +2683,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -2503,7 +2842,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -2515,7 +2854,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -2673,7 +3012,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -2685,7 +3024,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -2843,7 +3182,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -2855,7 +3194,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -3013,7 +3352,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -3025,7 +3364,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -3183,7 +3522,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -3195,7 +3534,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -3353,7 +3692,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -3365,7 +3704,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -3523,7 +3862,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -3535,7 +3874,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -3693,7 +4032,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -3705,7 +4044,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -3863,7 +4202,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -3875,7 +4214,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -4033,7 +4372,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -4045,7 +4384,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>
@@ -4136,6 +4475,175 @@
                         </send_mail>
                     </fields>
                 </pay_payment_webshopgiftcard>
+                <pay_payment_wijncadeau>
+                    <label>Pay.nl - Wijncadeau</label>        
+                    <model>pay_payment/Model_Paymentmethod_Wijncadeau</model>            
+                    <sort_order>1195</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>   
+                        <active translate="label">
+                            <label>Actief</label>
+                            <comment>Wilt u deze betaalmethode gebruiken</comment>                           
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_paymentmethod_wijncadeau_active</source_model>                            
+                        </active>
+                        <title translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Titel van de betaalmethode</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        
+                        <sort_order translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Betaalmethode sorteer volgorde</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <min_order_total translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Minimum bedrag</label>
+                            <comment>Het minimum bedrag waarvoor deze betaalmethode gebruikt mag worden</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Maximum bedrag</label>
+                            <comment>Het maximum bedrag waarvoor deze betaalmethode gebruikt mag worden</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_order_total>
+                        <allowspecific translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Beschikbaarheid per land</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <depends>
+                                <active>1</active>
+                                <allowspecific>1</allowspecific>
+                            </depends>
+                            <label>Toegestane landen</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Selecteer de landen waarvoor deze betaalmethode beschikbaar is</comment>
+                        </specificcountry>
+                        <order_status translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Nieuwe order status</label>
+                            <comment>De status die een order moet krijgen bij het toevoegen</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_status_pendingPayment</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status>
+                        <order_status_success translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Gelukt order status</label>
+                            <comment>De status die een order moet krijgen na succesvolle betaling</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_status_processing</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status_success>
+                        <charge_type translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Extra kosten rekenen</label>
+                            <comment>Geef hier aan of u extra kosten wilt rekenen op basis van een percentage van het totaalbedrag of een vast bedrag</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/system_config_source_chargetype</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </charge_type>
+                        <charge_value translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Extra kosten</label>
+                            <comment>Geef hier aan hoeveel extra kosten u wilt rekenen, gebruik een punt voor decimalen, als u geen extra kosten wilt rekenen vult u niets in</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>201</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </charge_value>
+                        <charge_tax_class translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Btw voor extra kosten</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_shipping_taxclass</source_model>
+                            <sort_order>202</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </charge_tax_class>
+                        <send_mail translate="label">
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                            <label>Bevestigingsmail sturen</label>
+                            <comment>Wanneer wilt u dat de bevestigingsmail wordt verstuurd</comment>                           
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pay_payment/source_sendmail</source_model>                            
+                        </send_mail>
+                    </fields>
+                </pay_payment_wijncadeau>
                 <!-- Yourgift -->  
                 <pay_payment_yourgift translate="label" module="paygate">
                     <label>Pay.nl - YourGift</label>        
@@ -4203,7 +4711,7 @@
                             <show_in_store>1</show_in_store>
                         </max_order_total>
                         <allowspecific translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                             </depends>
                             <label>Beschikbaarheid per land</label>
@@ -4215,7 +4723,7 @@
                             <show_in_store>1</show_in_store>
                         </allowspecific>
                         <specificcountry translate="label">
-                             <depends>
+                            <depends>
                                 <active>1</active>
                                 <allowspecific>1</allowspecific>
                             </depends>

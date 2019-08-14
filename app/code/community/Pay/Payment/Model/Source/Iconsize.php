@@ -14,6 +14,7 @@ class Pay_Payment_Model_Source_Iconsize {
             array('value' => '50', 'label' => '50x50px'),       
             array('value' => '75', 'label' => '75x75px'),       
             array('value' => '100', 'label' => '100x100px'),       
+            array('value' => '50x32', 'label' => '50x32px'),
         );
     }
 

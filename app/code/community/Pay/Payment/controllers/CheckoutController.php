@@ -3,6 +3,7 @@
 class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
 
     public function redirectAction() {
+        $helper = Mage::helper('pay_payment');
         $session = Mage::getSingleton('checkout/session');
         /* @var $session Mage_Checkout_Model_Session */
         if ($session->getLastRealOrderId()) {
@@ -42,15 +43,17 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
                         $productId = $item->getId();
                         $description = $item->getName();
                         $price = $item->getPriceInclTax();
+                        $taxAmount = $item->getTaxAmount();
                         $quantity = $item->getQtyOrdered();
 
+                        $taxClass= $helper->calculateTaxClass($price,$taxAmount);
 
                         $price = round($price * 100);
 
                         $itemsTotal += $price * $quantity;
 
                         if ($price != 0) {
-                            $api->addProduct($productId, $description, $price, $quantity, 0);
+                            $api->addProduct($productId, $description, $price, $quantity, $taxClass);
                         }
                     }
 
@@ -58,23 +61,22 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
 
                     if ($discountAmount < 0) {
                         $itemsTotal += round($discountAmount * 100);
-                        $api->addProduct(0, 'Korting (' . $order->getDiscountDescription() . ')', round($discountAmount * 100), 1, 0);
+                        $api->addProduct(0, 'Korting (' . $order->getDiscountDescription() . ')', round($discountAmount * 100), 1, 'N');
                     }
 
                     $shipping = $order->getShippingInclTax();
+                    $shippingTax = $order->getShippingTaxAmount();
+                    $shippingTaxClass = $helper->calculateTaxClass($shipping, $shippingTax);
                     $shipping = round($shipping * 100);
                     if ($shipping != 0) {
                         $itemsTotal += round($shipping * 100);
-                        $api->addProduct('0', 'Verzendkosten', $shipping, 1, 0);
+                        $api->addProduct('0', 'Verzendkosten', $shipping, 1, $shippingTaxClass);
                     }
                     $extraFee = $order->getPaymentCharge();
                     if ($extraFee != 0) {
                         $itemsTotal += round($extraFee * 100);
-                        $api->addProduct('0', Mage::getStoreConfig('pay_payment/general/text_payment_charge', Mage::app()->getStore()), round($extraFee * 100), 1, 0);
+                        $api->addProduct('0', Mage::getStoreConfig('pay_payment/general/text_payment_charge', Mage::app()->getStore()), round($extraFee * 100), 1, 'H');
                     }
-
-
-
 
                     $arrEnduser = array();
                     $shippingAddress = $order->getShippingAddress();
@@ -85,7 +87,7 @@ class Pay_Payment_CheckoutController extends Mage_Core_Controller_Front_Action {
                     $arrEnduser['emailAddress'] = $order->getCustomerEmail();
                     $billingAddress = $order->getBillingAddress();
 
-                    $helper = Mage::helper('pay_payment');
+                    
                     
                     if (!empty($shippingAddress)) {
                         $arrEnduser['initials'] = substr($shippingAddress->getFirstname(), 0, 1);
