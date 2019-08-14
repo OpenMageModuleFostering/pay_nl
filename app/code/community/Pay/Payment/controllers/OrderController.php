@@ -72,6 +72,7 @@ class Pay_Payment_OrderController extends Mage_Core_Controller_Front_Action {
     }
 
     public function exchangeAction() {
+        $error = false;
         $params = $this->getRequest()->getParams();      
 
         $transactionId = $params['order_id'];
@@ -93,14 +94,21 @@ class Pay_Payment_OrderController extends Mage_Core_Controller_Front_Action {
             if ($e->getCode() == 0) {
                 $resultMsg = 'NOTICE: ';
             } else {
+                $error = true;
                 $resultMsg = 'ERROR: ';
             }
             $resultMsg .= $e->getMessage();
         } catch (Exception $e) {
+            $error = true;
             $resultMsg = 'ERROR: ' . $e->getMessage();
         }
 
-        echo "TRUE|" . $resultMsg;
+        if($error){
+            echo "FALSE|" . $resultMsg;
+        } else {
+            echo "TRUE|" . $resultMsg;
+        }
+        
         die();
     }
 

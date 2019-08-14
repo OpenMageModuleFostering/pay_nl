@@ -26,6 +26,13 @@ class Pay_Payment_Helper_Data extends Mage_Core_Helper_Abstract
             ->getFirstItem();
         return $transaction;
     }
+    public function isOrderPaid($orderId){
+        $transactions = Mage::getModel('pay_payment/transaction')
+            ->getCollection()
+            ->addFieldToFilter('order_id', $orderId);
+
+        
+    }
 
     public function getOptions($store = null)
     {

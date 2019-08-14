@@ -245,9 +245,10 @@ class Pay_Payment_Helper_Order extends Mage_Core_Helper_Abstract
             return true;
         } elseif ($status == Pay_Payment_Model_Transaction::STATE_CANCELED)
         {
-            if ($transaction->getStatus() == Pay_Payment_Model_Transaction::STATE_SUCCESS)
+            
+            if ($order->getAmountDue() <= 0 || $transaction->getStatus() == Pay_Payment_Model_Transaction::STATE_SUCCESS)
             {
-                throw Mage::exception('Pay_Payment', 'Cannot change status from ' . $transaction->getStatus() . ' to ' . $status, 1);
+                throw Mage::exception('Pay_Payment', 'Cannot cancel already paid order');
             }
 
             // order annuleren
@@ -267,9 +268,10 @@ class Pay_Payment_Helper_Order extends Mage_Core_Helper_Abstract
             return true;
         } else
         {
-            throw Mage::exception('Pay_Payment', 'Unknown status ' . $status, 0);
+            throw Mage::exception('Pay_Payment', 'Unknown status ' . $status, 1);
         }
     }
+
 
     public function getTransactionInfo($transactionId, $store = null)
     {
