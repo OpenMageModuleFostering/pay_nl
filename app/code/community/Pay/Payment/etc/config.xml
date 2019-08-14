@@ -2,11 +2,36 @@
 <config>
     <modules>
         <Pay_Payment>
-            <version>3.6.6</version>
+            <version>3.7.0</version>
         </Pay_Payment>
     </modules>
-
     <global>
+        <events>
+            <core_collection_abstract_load_before>
+                <observers>
+                    <pay_payment>
+                        <class>Pay_Payment_Model_Observer</class>
+                        <method>addAutoloader</method>
+                    </pay_payment>
+                </observers>
+            </core_collection_abstract_load_before>
+            <resource_get_tablename>
+                <observers>
+                    <pay_payment>
+                        <class>Pay_Payment_Model_Observer</class>
+                        <method>addAutoloader</method>
+                    </pay_payment>
+                </observers>
+            </resource_get_tablename>
+            <add_spl_autoloader>
+                <observers>
+                    <pay_payment>
+                        <class>Pay_Payment_Model_Observer</class>
+                        <method>addAutoloader</method>
+                    </pay_payment>
+                </observers>
+            </add_spl_autoloader>
+        </events>
         <models>
             <pay_payment>
                 <class>Pay_Payment_Model</class>
@@ -200,7 +225,6 @@
             <pay_payment_klarna>
                 <active>0</active>
                 <model>pay_payment/Paymentmethod_Klarna</model>
-                <auto_capture>1</auto_capture>
                 <title>Klarna</title>
                 <payment_action>authorize</payment_action>
                 <order_status>pending_payment</order_status>
@@ -308,6 +332,17 @@
                 <send_mail>success</send_mail>
                 <limit_shipping>0</limit_shipping>
             </pay_payment_incasso>
+            <pay_payment_instore>
+                <active>0</active>
+                <active_checkout>0</active_checkout>
+                <model>pay_payment/Paymentmethod_Instore</model>
+                <title>Pinnen</title>
+                <payment_action>authorize</payment_action>
+                <order_status>pending_payment</order_status>
+                <order_status_success>processing</order_status_success>
+                <send_mail>success</send_mail>
+                <limit_shipping>0</limit_shipping>
+            </pay_payment_instore>
             <pay_payment_paypal>
                 <active>0</active>
                 <model>pay_payment/Paymentmethod_Paypal</model>
@@ -512,6 +547,16 @@
                 <send_mail>success</send_mail>
                 <limit_shipping>0</limit_shipping>
             </pay_payment_paylink>
+            <pay_payment_yehhpay>
+                <active>0</active>
+                <model>pay_payment/Paymentmethod_Yehhpay</model>
+                <title>Yehhpay</title>
+                <payment_action>authorize</payment_action>
+                <order_status>pending_payment</order_status>
+                <order_status_success>processing</order_status_success>
+                <send_mail>success</send_mail>
+                <limit_shipping>0</limit_shipping>
+            </pay_payment_yehhpay>
         </payment>
     </default>
 </config>
